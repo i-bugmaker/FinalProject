@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">宠爱</string>
+    <string name="title_activity_home_page">HomePage</string>
+    <string name="title_home">首页</string>
+    <string name="title_info">信息</string>
+    <string name="title_forum">论坛</string>
+    <string name="title_me">我的</string>
 </resources>
