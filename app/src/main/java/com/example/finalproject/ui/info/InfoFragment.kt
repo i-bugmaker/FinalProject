@@ -22,14 +22,14 @@ class InfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
+        val infoViewModel =
             ViewModelProvider(this).get(InfoViewModel::class.java)
 
         _binding = FragmentInfoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textInfo
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        infoViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

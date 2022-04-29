@@ -22,14 +22,14 @@ class ForumFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
+        val forumViewModel =
             ViewModelProvider(this).get(ForumViewModel::class.java)
 
         _binding = FragmentForumBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textForum
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        forumViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
