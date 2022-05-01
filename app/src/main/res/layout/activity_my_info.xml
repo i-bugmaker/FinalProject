@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/ic_arrow_left" />
 
         <TextView
             android:id="@+id/textView"
@@ -35,7 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_person_black_24dp" />
+            android:src="@drawable/ic_save" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
             android:gravity="center_vertical|start"
-            android:text="TextView" />
+            android:text="修改头像" />
     </LinearLayout>
 
     <LinearLayout
@@ -82,7 +82,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="用户ID" />
+                android:text="用户ID:" />
 
             <TextView
                 android:id="@+id/userid_input"
@@ -90,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="center_vertical|start"
-                android:text="TextView" />
+                android:text="" />
 
 
         </LinearLayout>
@@ -105,7 +105,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="昵称" />
+                android:text="昵称:" />
 
             <TextView
                 android:id="@+id/username_input"
@@ -113,7 +113,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="center_vertical|start"
-                android:text="TextView" />
+                android:text="" />
 
 
         </LinearLayout>
@@ -128,7 +128,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="性别" />
+                android:text="性别:" />
 
             <TextView
                 android:id="@+id/sex_input"
@@ -136,7 +136,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="center_vertical|start"
-                android:text="TextView" />
+                android:text="" />
 
 
         </LinearLayout>
@@ -151,7 +151,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="生日" />
+                android:text="生日:" />
 
             <TextView
                 android:id="@+id/birthday_input"
@@ -159,7 +159,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="center_vertical|start"
-                android:text="TextView" />
+                android:text="" />
 
 
         </LinearLayout>
