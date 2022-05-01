@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.me
 
 import android.R
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +42,10 @@ class MeFragment : Fragment() {
         listViewMe.adapter = adapter
         listViewMe.setOnItemClickListener { parent, view, position, id ->
             when(position) {
-                0 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
+                0 -> {
+                    val intent = Intent(requireContext(), MyInfo::class.java)
+                    startActivity(intent)
+                }
                 1 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()                1 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
                 2 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
                 3 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
