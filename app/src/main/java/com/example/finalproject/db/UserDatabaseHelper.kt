@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.finalproject.Login
 import com.example.finalproject.User
 
-class UserDatabaseHelper(val context: Login, name: String, version: Int) :
+class UserDatabaseHelper(val context: Context, name: String, version: Int) :
     SQLiteOpenHelper(context, name, null, version) {
 
     private val createUser = "create table User(" +

@@ -130,13 +130,21 @@
                 android:gravity="center"
                 android:text="性别:" />
 
-            <TextView
+<!--            <TextView-->
+<!--                android:id="@+id/sex_input"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="4"-->
+<!--                android:gravity="center_vertical|start"-->
+<!--                android:clickable="true"-->
+<!--                android:text="" />-->
+            <Spinner
                 android:id="@+id/sex_input"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:gravity="center_vertical|start"
-                android:text="" />
+                android:spinnerMode="dialog"
+                android:gravity="center_vertical|start" />
 
 
         </LinearLayout>

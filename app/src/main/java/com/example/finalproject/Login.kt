@@ -45,7 +45,7 @@ class Login : AppCompatActivity() {
         }
 
         //注册响应事件
-        binding.registerLogin.setOnClickListener {
+        registerBtn.setOnClickListener {
             val username = usernameView.text.toString()
             val password = passwordView.text.toString()
             Toast.makeText(this, "点击了注册", Toast.LENGTH_SHORT).show()
