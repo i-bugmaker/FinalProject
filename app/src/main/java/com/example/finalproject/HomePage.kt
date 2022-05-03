@@ -2,22 +2,20 @@ package com.example.finalproject
 
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.finalproject.databinding.ActivityHomePageBinding
-import com.example.finalproject.db.UserDatabaseHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class HomePage : AppCompatActivity() {
-
     private lateinit var binding: ActivityHomePageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -36,9 +34,5 @@ class HomePage : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
-        dbHelper.writableDatabase
-        Toast.makeText(this, "Create succeeded", Toast.LENGTH_SHORT).show()
     }
 }

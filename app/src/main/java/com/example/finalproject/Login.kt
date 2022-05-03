@@ -36,7 +36,9 @@ class Login : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "用户名不存在,请先注册", Toast.LENGTH_SHORT).show()
             } else if (password == findPwdByUser(username)) {
-                startActivity(Intent(this, HomePage::class.java))
+                val intent = (Intent(this, HomePage::class.java))
+                User.setCurrentUsername(username)
+                startActivity(intent)
             } else {
                 Toast.makeText(this, "密码错误,请重试", Toast.LENGTH_SHORT).show()
             }
@@ -85,6 +87,7 @@ class Login : AppCompatActivity() {
                     return true
                 }
             } while (cursor.moveToNext())
+            cursor.close()
             return false
         }
     }
@@ -105,6 +108,7 @@ class Login : AppCompatActivity() {
                 }
             } while (cursor.moveToNext())
         }
+        cursor.close()
         return null
     }
 }
