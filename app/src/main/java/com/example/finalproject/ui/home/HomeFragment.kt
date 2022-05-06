@@ -37,10 +37,10 @@ class HomeFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.layoutManager = layoutManager
         homeViewModel.cardList.apply {
-            add(Card("Apple", R.drawable.banner1))
-            add(Card("Apple", R.drawable.banner1))
-            add(Card("Banana", R.drawable.banner1))
-            add(Card("Orange", R.drawable.banner1))
+            add(Card("狗", R.drawable.banner0))
+            add(Card("猫", R.drawable.banner1))
+            add(Card("鹦鹉", R.drawable.banner2))
+            add(Card("金鱼", R.drawable.banner3))
             add(Card("Watermelon", R.drawable.banner1))
             add(Card("Pear", R.drawable.banner1))
             add(Card("Grape", R.drawable.banner1))
