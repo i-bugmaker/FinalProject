@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.Card
+import com.example.finalproject.CardList
 import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentHomeBinding
+import com.example.finalproject.databinding.FragmentInfoBinding
 
 class HomeFragment : Fragment() {
 
@@ -34,24 +37,23 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView.layoutManager = layoutManager
-        homeViewModel.cardList.apply {
-            add(Card("狗", R.drawable.banner0))
-            add(Card("猫", R.drawable.banner1))
-            add(Card("鹦鹉", R.drawable.banner2))
-            add(Card("金鱼", R.drawable.banner3))
-            add(Card("Watermelon", R.drawable.banner1))
-            add(Card("Pear", R.drawable.banner1))
-            add(Card("Grape", R.drawable.banner1))
-            add(Card("Pineapple", R.drawable.banner1))
-            add(Card("Strawberry", R.drawable.banner1))
-            add(Card("Cherry", R.drawable.banner1))
-            add(Card("Mango", R.drawable.banner1))
-        }
-        val adapter = CardAdapter(homeViewModel.cardList)
-        binding.recyclerView.adapter = adapter
-        homeViewModel.cardList
+        val cardList = CardList.cardList
+//        if (cardList.isEmpty()) {
+            Toast.makeText(requireContext(),"初始化数据",Toast.LENGTH_SHORT).show()
+            val layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerView.layoutManager = layoutManager
+//            cardList.apply {
+//                add(Card("狗", R.drawable.banner0))
+//                add(Card("猫", R.drawable.banner1))
+//                add(Card("鹦鹉", R.drawable.banner2))
+//                add(Card("金鱼", R.drawable.banner3))
+//
+//            }
+            val adapter = CardAdapter(cardList)
+            binding.recyclerView.adapter = adapter
+//        }
+
+//        homeViewModel.cardList
         return root
     }
 

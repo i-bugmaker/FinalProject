@@ -13,7 +13,7 @@ class HomeViewModel : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    val cardList = ArrayList<Card>()
+//    val cardList = ArrayList<Card>()
 
 
 //            cardList.add(Card("Apple", R.drawable.banner1))

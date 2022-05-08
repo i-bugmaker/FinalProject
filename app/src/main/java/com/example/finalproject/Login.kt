@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.finalproject.databinding.ActivityLoginBinding
+import com.example.finalproject.db.PetDatabaseHelper
 import com.example.finalproject.db.UserDatabaseHelper
 
 class Login : AppCompatActivity() {
@@ -20,6 +21,15 @@ class Login : AppCompatActivity() {
         val registerBtn = binding.registerLogin
         val usernameView = binding.usernameLogin
         val passwordView = binding.passwordLogin
+
+
+        val dbHelper = PetDatabaseHelper(this, "pet.db", 1)
+        val db = dbHelper.writableDatabase
+        val pet = ContentValues().apply {
+            put("nickname", "miki")
+            put("sex", "雄性")
+        }
+        db.insert("Pet", null, pet)
 
         Toast.makeText(this, "程序启动", Toast.LENGTH_SHORT).show()
 
@@ -48,7 +58,7 @@ class Login : AppCompatActivity() {
         registerBtn.setOnClickListener {
             val username = usernameView.text.toString()
             val password = passwordView.text.toString()
-            Toast.makeText(this, "点击了注册", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show()
             if (username.isEmpty() || password.isEmpty()
             ) {
                 Toast.makeText(this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show()

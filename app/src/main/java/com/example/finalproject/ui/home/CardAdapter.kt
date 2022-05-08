@@ -31,4 +31,5 @@ class CardAdapter(val cardList: List<Card>): RecyclerView.Adapter<CardAdapter.Vi
     override fun getItemCount(): Int =
         cardList.size
 
+
 }
