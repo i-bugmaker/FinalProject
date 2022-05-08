@@ -12,8 +12,10 @@
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2215" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/drawable/ic_person.xml" value="0.2215" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/drawable/ic_person_black_24dp.xml" value="0.2215" />
+        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/drawable/ic_save.xml" value="0.107" />
+        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/drawable/shape_frame.xml" value="0.1" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_home_page.xml" value="0.1" />
-        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.213768115942029" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_me_option.xml" value="0.1585144927536232" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/activity_my_info.xml" value="0.1" />
@@ -25,7 +27,9 @@
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/fragment_notifications.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/home_item.xml" value="0.1" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/me_item.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/layout/shape_frame.xml" value="0.213768115942029" />
         <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/menu/bottom_nav_menu.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/HuangMenghui/AndroidStudioProjects/FinalProject/app/src/main/res/xml/file_paths.xml" value="0.23541666666666666" />
       </map>
     </option>
   </component>

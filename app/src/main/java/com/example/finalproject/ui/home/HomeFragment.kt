@@ -39,9 +39,9 @@ class HomeFragment : Fragment() {
 //        }
         val cardList = CardList.cardList
 //        if (cardList.isEmpty()) {
-            Toast.makeText(requireContext(),"初始化数据",Toast.LENGTH_SHORT).show()
-            val layoutManager = LinearLayoutManager(requireContext())
-            binding.recyclerView.layoutManager = layoutManager
+        Toast.makeText(requireContext(), "初始化数据", Toast.LENGTH_SHORT).show()
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.layoutManager = layoutManager
 //            cardList.apply {
 //                add(Card("狗", R.drawable.banner0))
 //                add(Card("猫", R.drawable.banner1))
@@ -49,8 +49,8 @@ class HomeFragment : Fragment() {
 //                add(Card("金鱼", R.drawable.banner3))
 //
 //            }
-            val adapter = CardAdapter(cardList)
-            binding.recyclerView.adapter = adapter
+        val adapter = CardAdapter(cardList)
+        binding.recyclerView.adapter = adapter
 //        }
 
 //        homeViewModel.cardList

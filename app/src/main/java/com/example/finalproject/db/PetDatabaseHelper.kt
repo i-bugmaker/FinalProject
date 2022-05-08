@@ -10,9 +10,9 @@ class PetDatabaseHelper(val context: Context, name: String, version: Int) :
     private val createPet = "create table Pet(" +
             "id integer primary key autoincrement ," +
             "nickname text ," +
-            "sex text ," +
-            "age text ," +
             "breed text ," +
+            "age text ," +
+            "sex text ," +
             "image text" +
             ")"
 
@@ -21,7 +21,8 @@ class PetDatabaseHelper(val context: Context, name: String, version: Int) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("Not yet implemented")
+        db?.execSQL("drop table if exists Pet")
+        onCreate(db)
     }
 
     override fun onConfigure(db: SQLiteDatabase?) {

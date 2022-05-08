@@ -23,13 +23,13 @@ class Login : AppCompatActivity() {
         val passwordView = binding.passwordLogin
 
 
-        val dbHelper = PetDatabaseHelper(this, "pet.db", 1)
-        val db = dbHelper.writableDatabase
-        val pet = ContentValues().apply {
-            put("nickname", "miki")
-            put("sex", "雄性")
-        }
-        db.insert("Pet", null, pet)
+//        val dbHelper = PetDatabaseHelper(this, "pet.db", 1)
+//        val db = dbHelper.writableDatabase
+//        val pet = ContentValues().apply {
+//            put("nickname", "miki")
+//            put("sex", "雄性")
+//        }
+//        db.insert("Pet", null, pet)
 
         Toast.makeText(this, "程序启动", Toast.LENGTH_SHORT).show()
 
@@ -67,7 +67,7 @@ class Login : AppCompatActivity() {
             ) {
                 Toast.makeText(this, "用户名已存在", Toast.LENGTH_SHORT).show()
             } else {
-                val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+                val dbHelper = UserDatabaseHelper(this, "user.db", 2)
                 val db = dbHelper.writableDatabase
                 val user = ContentValues().apply {
                     put("username", username)
@@ -81,7 +81,7 @@ class Login : AppCompatActivity() {
     @SuppressLint("Range")
     fun isExistUser(username: String): Boolean {
 
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
         val db = dbHelper.writableDatabase
         val cursor = db.query(
             "User", arrayOf("username"), "username=?",
@@ -104,7 +104,7 @@ class Login : AppCompatActivity() {
 
     @SuppressLint("Range")
     fun findPwdByUser(username: String): String? {
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
         val db = dbHelper.readableDatabase
         val cursor = db.query(
             "User", null, "username=?",

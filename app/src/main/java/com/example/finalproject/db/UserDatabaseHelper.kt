@@ -28,6 +28,7 @@ class UserDatabaseHelper(val context: Context, name: String, version: Int) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
-        TODO("Not yet implemented")
+        db?.execSQL("drop table if exists User")
+        onCreate(db)
     }
 }

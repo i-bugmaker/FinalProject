@@ -111,18 +111,25 @@
         android:text="宠物描述:" />
 
     <EditText
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="上传照片:" />
 
-    <EditText
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+
+    <Button
+        android:id="@+id/capture"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="拍摄"/>
 
     <TextView
         android:layout_width="match_parent"
