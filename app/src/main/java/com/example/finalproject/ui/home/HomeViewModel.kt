@@ -1,10 +1,12 @@
 package com.example.finalproject.ui.home
 
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.Card
 import com.example.finalproject.R
+import com.example.finalproject.db.PublicDatabaseHelper
 
 class HomeViewModel : ViewModel() {
 
@@ -12,6 +14,8 @@ class HomeViewModel : ViewModel() {
         value = "This is home Fragment"
     }
     val text: LiveData<String> = _text
+
+
 
 //    val cardList = ArrayList<Card>()
 

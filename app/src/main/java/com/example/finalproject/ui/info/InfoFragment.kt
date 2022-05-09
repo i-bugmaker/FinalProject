@@ -16,19 +16,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.finalproject.Card
-import com.example.finalproject.CardList
-import com.example.finalproject.R
 import com.example.finalproject.databinding.FragmentInfoBinding
 import com.example.finalproject.db.PetDatabaseHelper
-import com.example.finalproject.ui.home.CardAdapter
+import com.example.finalproject.db.PublicDatabaseHelper
 import com.example.finalproject.ui.home.HomeViewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 val takePhoto = 1
 lateinit var imageUri: Uri
@@ -42,6 +42,7 @@ class InfoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("Range")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,8 +100,8 @@ class InfoFragment : Fragment() {
 //            val capture = binding.capture
             val image = binding.image
 
-            val name = binding.name.text.toString()
             val contact = binding.contact.text.toString()
+            val phone = binding.phone.text.toString()
 
 
             val petDbHelper = PetDatabaseHelper(requireContext(), "pet.db", 2)
@@ -112,6 +113,20 @@ class InfoFragment : Fragment() {
             petDb.execSQL(
                 "insert into Pet (nickname, breed, age, sex, image) values(?, ?, ?, ?,?)",
                 arrayOf(nickname, breed, age, sex, os.toByteArray())
+            )
+            val cursor = petDb.rawQuery("select * from Pet", null)
+            cursor.moveToLast()
+            val pet_id = cursor.getInt(cursor.getColumnIndex("id"))
+            val publicDbHelper = PublicDatabaseHelper(requireContext(), "public.db", 2)
+            val publicDb = publicDbHelper.writableDatabase
+            val current = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val formatted = current.format(formatter)
+
+
+            publicDb.execSQL(
+                "insert into Public (date, description, pet_id, contact,phone) values(?, ?, ?, ?,?)",
+                arrayOf(formatted, description, pet_id, contact, phone)
             )
 //            val cursor = petDb.rawQuery("select * from Pet", null)
 //            cursor.moveToLast()

@@ -9,6 +9,7 @@ class Card(
     val breed: String,
     val age: String,
     val sex: String,
-    val image: Bitmap
+    val image: Bitmap,
 
+    val description:String
 )

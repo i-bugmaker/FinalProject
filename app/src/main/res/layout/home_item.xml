@@ -46,7 +46,7 @@
                 android:text="未领养"/>
 
             <TextView
-                android:id="@+id/descroption"
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
