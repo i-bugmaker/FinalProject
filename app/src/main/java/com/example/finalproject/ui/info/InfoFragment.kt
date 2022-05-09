@@ -113,14 +113,14 @@ class InfoFragment : Fragment() {
                 "insert into Pet (nickname, breed, age, sex, image) values(?, ?, ?, ?,?)",
                 arrayOf(nickname, breed, age, sex, os.toByteArray())
             )
-            val cursor = petDb.rawQuery("select * from Pet", null)
-            cursor.moveToLast()
-            val imageHex = cursor.getBlob(cursor.getColumnIndex("image"))
-            val bit = BitmapFactory.decodeByteArray(imageHex, 0, imageHex.size)
-            CardList.cardList.add(0, Card(nickname, bit))
-//            val image = binding.image.toString().toInt()
-            val adapter = CardAdapter(CardList.cardList)
-            adapter.notifyItemInserted(0)
+//            val cursor = petDb.rawQuery("select * from Pet", null)
+//            cursor.moveToLast()
+//            val imageHex = cursor.getBlob(cursor.getColumnIndex("image"))
+//            val bit = BitmapFactory.decodeByteArray(imageHex, 0, imageHex.size)
+//            CardList.cardList.add(0, Card(nickname, breed, age, sex, bit))
+////            val image = binding.image.toString().toInt()
+//            val adapter = CardAdapter(CardList.cardList)
+//            adapter.notifyItemInserted(0)
 
             Toast.makeText(requireContext(), "发布成功", Toast.LENGTH_SHORT).show()
         }

@@ -12,8 +12,8 @@ import com.example.finalproject.*
 class CardAdapter(val cardList: List<Card>): RecyclerView.Adapter<CardAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val fruitImage: ImageView = view.findViewById(R.id.fruitImage)
-        val fruitName: TextView = view.findViewById(R.id.fruitName)
+        val petImage: ImageView = view.findViewById(R.id.cardImage)
+        val petBreed: TextView = view.findViewById(R.id.cardBreed)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardAdapter.ViewHolder {
@@ -24,8 +24,8 @@ class CardAdapter(val cardList: List<Card>): RecyclerView.Adapter<CardAdapter.Vi
 
     override fun onBindViewHolder(holder: CardAdapter.ViewHolder, position: Int) {
         val card = cardList[position]
-        holder.fruitImage.setImageBitmap(card.imageId)
-        holder.fruitName.text = card.name
+        holder.petImage.setImageBitmap(card.image)
+        holder.petBreed.text = card.breed
     }
 
     override fun getItemCount(): Int =
