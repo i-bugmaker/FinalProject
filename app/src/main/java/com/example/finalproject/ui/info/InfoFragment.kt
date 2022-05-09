@@ -1,6 +1,7 @@
 package com.example.finalproject.ui.info
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -26,6 +27,7 @@ import com.example.finalproject.databinding.FragmentInfoBinding
 import com.example.finalproject.db.PetDatabaseHelper
 import com.example.finalproject.ui.home.CardAdapter
 import com.example.finalproject.ui.home.HomeViewModel
+import java.io.ByteArrayOutputStream
 import java.io.File
 
 val takePhoto = 1
@@ -40,6 +42,7 @@ class InfoFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    @SuppressLint("Range")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,7 +76,11 @@ class InfoFragment : Fragment() {
                 Uri.fromFile(outputImage)
             }
 // 启动相机程序
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE),1);
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            );
 
             val intent = Intent("android.media.action.IMAGE_CAPTURE")
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
@@ -89,21 +96,31 @@ class InfoFragment : Fragment() {
             val sex =
                 if (binding.rbFemale.isChecked) binding.rbFemale.text.toString() else binding.rbMale.text.toString()
             val description = binding.description.text.toString()
-            val capture = binding.capture
+//            val capture = binding.capture
+            val image = binding.image
 
             val name = binding.name.text.toString()
             val contact = binding.contact.text.toString()
-            CardList.cardList.add(0, Card(nickname, R.drawable.banner3))
-//            val image = binding.image.toString().toInt()
-            val adapter = CardAdapter(CardList.cardList)
-            adapter.notifyItemInserted(0)
+
 
             val petDbHelper = PetDatabaseHelper(requireContext(), "pet.db", 2)
             val petDb = petDbHelper.writableDatabase
+            val os = ByteArrayOutputStream()
+            val bitmap: Bitmap =
+                BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(imageUri))
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os)
             petDb.execSQL(
                 "insert into Pet (nickname, breed, age, sex, image) values(?, ?, ?, ?,?)",
-                arrayOf(nickname, breed, age, sex, capture.toString())
+                arrayOf(nickname, breed, age, sex, os.toByteArray())
             )
+            val cursor = petDb.rawQuery("select * from Pet", null)
+            cursor.moveToLast()
+            val imageHex = cursor.getBlob(cursor.getColumnIndex("image"))
+            val bit = BitmapFactory.decodeByteArray(imageHex, 0, imageHex.size)
+            CardList.cardList.add(0, Card(nickname, bit))
+//            val image = binding.image.toString().toInt()
+            val adapter = CardAdapter(CardList.cardList)
+            adapter.notifyItemInserted(0)
 
             Toast.makeText(requireContext(), "发布成功", Toast.LENGTH_SHORT).show()
         }
@@ -121,8 +138,11 @@ class InfoFragment : Fragment() {
             takePhoto -> {
                 if (resultCode == Activity.RESULT_OK) {
 // 将拍摄的照片显示出来
-                    val bitmap = BitmapFactory.decodeStream(requireContext().contentResolver.openInputStream(imageUri))
-                    binding.image.setImageBitmap(rotateIfRequired(bitmap))
+                    val bitmap = BitmapFactory.decodeStream(
+                        requireContext().contentResolver.openInputStream(imageUri)
+                    )
+                    val rotatedBitmap = rotateIfRequired(bitmap)
+                    binding.image.setImageBitmap(rotatedBitmap)
                 }
             }
         }
@@ -130,8 +150,10 @@ class InfoFragment : Fragment() {
 
     private fun rotateIfRequired(bitmap: Bitmap): Bitmap {
         val exif = ExifInterface(outputImage.path)
-        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_NORMAL)
+        val orientation = exif.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.ORIENTATION_NORMAL
+        )
         return when (orientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(bitmap, 90)
             ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(bitmap, 180)
@@ -139,11 +161,14 @@ class InfoFragment : Fragment() {
             else -> bitmap
         }
     }
+
     private fun rotateBitmap(bitmap: Bitmap, degree: Int): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(degree.toFloat())
-        val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height,
-            matrix, true)
+        val rotatedBitmap = Bitmap.createBitmap(
+            bitmap, 0, 0, bitmap.width, bitmap.height,
+            matrix, true
+        )
         bitmap.recycle() // 将不再需要的Bitmap对象回收
         return rotatedBitmap
     }

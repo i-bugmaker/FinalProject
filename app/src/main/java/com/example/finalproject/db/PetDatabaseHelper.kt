@@ -13,7 +13,7 @@ class PetDatabaseHelper(val context: Context, name: String, version: Int) :
             "breed text ," +
             "age text ," +
             "sex text ," +
-            "image text" +
+            "image blob" +
             ")"
 
     override fun onCreate(db: SQLiteDatabase?) {

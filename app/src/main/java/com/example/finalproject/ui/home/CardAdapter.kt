@@ -24,7 +24,7 @@ class CardAdapter(val cardList: List<Card>): RecyclerView.Adapter<CardAdapter.Vi
 
     override fun onBindViewHolder(holder: CardAdapter.ViewHolder, position: Int) {
         val card = cardList[position]
-        holder.fruitImage.setImageResource(card.imageId)
+        holder.fruitImage.setImageBitmap(card.imageId)
         holder.fruitName.text = card.name
     }
 
