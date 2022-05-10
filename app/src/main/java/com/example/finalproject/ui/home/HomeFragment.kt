@@ -57,6 +57,9 @@ class HomeFragment : Fragment() {
         val petDb = petDbHelper.writableDatabase
         val pet_cursor = petDb.rawQuery("select * from Pet", null)
 
+        val publicDbHelper = PublicDatabaseHelper(requireContext(), "public.db", 2)
+        val publicDb = publicDbHelper.writableDatabase
+
 
         CardList.cardList.clear()
         if (pet_cursor.moveToFirst()) {
@@ -68,7 +71,11 @@ class HomeFragment : Fragment() {
                 val breed = pet_cursor.getString(pet_cursor.getColumnIndex("breed"))
                 val age = pet_cursor.getString(pet_cursor.getColumnIndex("age"))
                 val sex = pet_cursor.getString(pet_cursor.getColumnIndex("sex"))
-                CardList.cardList.add(0, Card(nickname, breed, age, sex, bit,"test"))
+                val pet_id = pet_cursor.getString(pet_cursor.getColumnIndex("id"))
+                val public_cursor = publicDb.rawQuery("select * from Public where id = ?", arrayOf(pet_id))
+                public_cursor.moveToFirst()
+                val description = public_cursor.getString(public_cursor.getColumnIndex("description"))
+                CardList.cardList.add(0, Card(nickname, breed, age, sex, bit,description))
                 val adapter = CardAdapter(cardList)
                 binding.recyclerView.adapter = adapter
             } while (pet_cursor.moveToNext())
