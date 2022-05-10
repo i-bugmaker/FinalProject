@@ -75,7 +75,8 @@ class HomeFragment : Fragment() {
                 val public_cursor = publicDb.rawQuery("select * from Public where id = ?", arrayOf(pet_id))
                 public_cursor.moveToFirst()
                 val description = public_cursor.getString(public_cursor.getColumnIndex("description"))
-                CardList.cardList.add(0, Card(nickname, breed, age, sex, bit,description))
+                val publicTime = public_cursor.getString(public_cursor.getColumnIndex("date"))
+                CardList.cardList.add(0, Card(nickname, breed, age, sex, bit,description,publicTime))
                 val adapter = CardAdapter(cardList)
                 binding.recyclerView.adapter = adapter
             } while (pet_cursor.moveToNext())

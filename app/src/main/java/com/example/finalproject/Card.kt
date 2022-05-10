@@ -11,5 +11,6 @@ class Card(
     val sex: String,
     val image: Bitmap,
 
-    val description:String
+    val description:String,
+    val publicTime:String
 )

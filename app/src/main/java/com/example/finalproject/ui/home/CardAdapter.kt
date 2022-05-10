@@ -20,6 +20,7 @@ class CardAdapter(val cardList: List<Card>) : RecyclerView.Adapter<CardAdapter.V
         val petImage: ImageView = view.findViewById(R.id.cardImage)
         val petBreed: TextView = view.findViewById(R.id.cardBreed)
         val description: TextView = view.findViewById(R.id.description)
+        val publicTime:TextView=view.findViewById(R.id.public_time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardAdapter.ViewHolder {
@@ -33,6 +34,7 @@ class CardAdapter(val cardList: List<Card>) : RecyclerView.Adapter<CardAdapter.V
         holder.petImage.setImageBitmap(card.image)
         holder.petBreed.text = card.breed
         holder.description.text = card.description
+        holder.publicTime.text=card.publicTime
     }
 
     override fun getItemCount(): Int =
