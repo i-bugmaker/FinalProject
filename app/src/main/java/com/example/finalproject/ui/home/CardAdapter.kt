@@ -18,7 +18,8 @@ import java.security.AccessController.getContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class CardAdapter(mContext:Context ,val cardList: List<Card>) : RecyclerView.Adapter<CardAdapter.ViewHolder>() {
+class CardAdapter(mContext: Context, val cardList: List<Card>) :
+    RecyclerView.Adapter<CardAdapter.ViewHolder>() {
 
     val adoptDbHelper = AdoptDatabaseHelper(mContext, "adopt.db", 2)
     val adoptDb = adoptDbHelper.writableDatabase
@@ -64,6 +65,8 @@ class CardAdapter(mContext:Context ,val cardList: List<Card>) : RecyclerView.Ada
                 arrayOf(card.username, card.pet_id, formatted)
             )
         }
+        holder.adopt_btn.isEnabled = !card.isAdopted
+        holder.adopt_text.text = if (card.isAdopted == true) "已领养" else "未领养"
     }
 
     override fun getItemCount(): Int =

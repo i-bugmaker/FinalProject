@@ -14,6 +14,7 @@ import com.example.finalproject.Card
 import com.example.finalproject.CardList
 import com.example.finalproject.databinding.FragmentHomeBinding
 import com.example.finalproject.databinding.FragmentInfoBinding
+import com.example.finalproject.db.AdoptDatabaseHelper
 import com.example.finalproject.db.PetDatabaseHelper
 import com.example.finalproject.db.PublicDatabaseHelper
 
@@ -61,6 +62,9 @@ class HomeFragment : Fragment() {
         val publicDbHelper = PublicDatabaseHelper(requireContext(), "public.db", 2)
         val publicDb = publicDbHelper.writableDatabase
 
+        val adoptDbHelper = AdoptDatabaseHelper(requireContext(), "adopt.db", 2)
+        val adoptDb = adoptDbHelper.writableDatabase
+
 
         CardList.cardList.clear()
         if (pet_cursor.moveToFirst()) {
@@ -73,13 +77,22 @@ class HomeFragment : Fragment() {
                 val age = pet_cursor.getString(pet_cursor.getColumnIndex("age"))
                 val sex = pet_cursor.getString(pet_cursor.getColumnIndex("sex"))
                 val pet_id = pet_cursor.getString(pet_cursor.getColumnIndex("id"))
-                val public_cursor = publicDb.rawQuery("select * from Public where id = ?", arrayOf(pet_id))
+                val public_cursor =
+                    publicDb.rawQuery("select * from Public where id = ?", arrayOf(pet_id))
                 public_cursor.moveToFirst()
-                val description = public_cursor.getString(public_cursor.getColumnIndex("description"))
+                val description =
+                    public_cursor.getString(public_cursor.getColumnIndex("description"))
                 val publicTime = public_cursor.getString(public_cursor.getColumnIndex("date"))
                 val username = public_cursor.getString(public_cursor.getColumnIndex("contact"))
-                CardList.cardList.add(0, Card(pet_id,nickname, breed, age, sex, bit,description,publicTime,username))
-                val adapter = CardAdapter(requireContext(),cardList)
+
+                val adopt_cursor =
+                    adoptDb.rawQuery("select * from Adopt where id = ?", arrayOf(pet_id))
+                var isAdopt = adopt_cursor.moveToFirst()
+                CardList.cardList.add(
+                    0,
+                    Card(pet_id, nickname, breed, age, sex, bit, description, publicTime, username,isAdopt)
+                )
+                val adapter = CardAdapter(requireContext(), cardList)
                 println(requireContext())
                 binding.recyclerView.adapter = adapter
             } while (pet_cursor.moveToNext())
