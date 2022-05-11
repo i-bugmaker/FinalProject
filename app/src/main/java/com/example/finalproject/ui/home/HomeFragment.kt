@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
         val cardList = CardList.cardList
 //        if (cardList.isEmpty()) {
         Toast.makeText(requireContext(), "初始化数据", Toast.LENGTH_SHORT).show()
+
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.layoutManager = layoutManager
 //            cardList.apply {
@@ -76,8 +77,10 @@ class HomeFragment : Fragment() {
                 public_cursor.moveToFirst()
                 val description = public_cursor.getString(public_cursor.getColumnIndex("description"))
                 val publicTime = public_cursor.getString(public_cursor.getColumnIndex("date"))
-                CardList.cardList.add(0, Card(nickname, breed, age, sex, bit,description,publicTime))
-                val adapter = CardAdapter(cardList)
+                val username = public_cursor.getString(public_cursor.getColumnIndex("contact"))
+                CardList.cardList.add(0, Card(pet_id,nickname, breed, age, sex, bit,description,publicTime,username))
+                val adapter = CardAdapter(requireContext(),cardList)
+                println(requireContext())
                 binding.recyclerView.adapter = adapter
             } while (pet_cursor.moveToNext())
         }

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.finalproject.Card
 import com.example.finalproject.R
+import com.example.finalproject.db.PetDatabaseHelper
 import com.example.finalproject.db.PublicDatabaseHelper
 
 class HomeViewModel : ViewModel() {

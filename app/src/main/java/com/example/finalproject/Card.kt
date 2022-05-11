@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 //class Card(val name:String, val imageId: Int)
 
 class Card(
+    val pet_id:String,
     val nickname: String,
     val breed: String,
     val age: String,
@@ -12,5 +13,7 @@ class Card(
     val image: Bitmap,
 
     val description:String,
-    val publicTime:String
+    val publicTime:String,
+    val username:String,
+    var isAdopted:Boolean = false
 )
