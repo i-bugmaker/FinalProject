@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 val takePhoto = 1
+val fromAlbum = 2
 lateinit var imageUri: Uri
 lateinit var outputImage: File
 
@@ -86,6 +88,16 @@ class InfoFragment : Fragment() {
             val intent = Intent("android.media.action.IMAGE_CAPTURE")
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivityForResult(intent, takePhoto)
+        }
+
+        val fromAlbumBtn = binding.fromAlbumBtn
+        fromAlbumBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "从相册选择", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+// 指定只显示图片
+            intent.type = "image/*"
+            startActivityForResult(intent, fromAlbum)
         }
         //发布按钮事件
         binding.publish.setOnClickListener {
@@ -160,8 +172,21 @@ class InfoFragment : Fragment() {
                     binding.image.setImageBitmap(rotatedBitmap)
                 }
             }
+            fromAlbum -> {
+                if (resultCode == Activity.RESULT_OK && data != null) {
+                    imageUri = data.data!!
+//                        val bitmap = getBitmapFromUri(imageUri)
+                    val bitmap = BitmapFactory.decodeFileDescriptor(requireContext().contentResolver.openFileDescriptor(imageUri, "r")?.fileDescriptor)
+                        binding.image.setImageBitmap(bitmap)
+                    }
+                }
+            }
         }
     }
+
+//    private fun getBitmapFromUri(uri: Uri) =contentResolver.openFileDescriptor(uri, "r")?.use {
+//            BitmapFactory.decodeFileDescriptor(it.fileDescriptor)
+//        }
 
     private fun rotateIfRequired(bitmap: Bitmap): Bitmap {
         val exif = ExifInterface(outputImage.path)
@@ -188,4 +213,3 @@ class InfoFragment : Fragment() {
         return rotatedBitmap
     }
 
-}

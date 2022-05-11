@@ -23,13 +23,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="64dp" />
+                android:gravity="center"
+                android:layout_marginStart="0dp" />
 
             <ImageView
                 android:id="@+id/cardImage"
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="2dp"
                 android:src="@drawable/banner1" />
         </LinearLayout>
 

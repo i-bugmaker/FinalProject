@@ -35,7 +35,8 @@ class MyInfo : AppCompatActivity() {
         useridInput.text = findIdByUsername(currentUsername).toString()
 
         val meViewModel = ViewModelProvider(this).get(MeViewModel::class.java)
-        val adapter = ArrayAdapter<String>(this, R.layout.simple_spinner_item, meViewModel.sexOption)
+        val adapter =
+            ArrayAdapter<String>(this, R.layout.simple_spinner_item, meViewModel.sexOption)
         val currentSex = findSexByUsername(currentUsername)
         Toast.makeText(this, "当前数据库性别为$currentSex", Toast.LENGTH_SHORT).show()
         binding.sexInput.setSelection(adapter.getPosition(currentSex))
@@ -52,7 +53,7 @@ class MyInfo : AppCompatActivity() {
                 id: Long
             ) {
                 binding.sexInput.setSelection(position)
-                val dbHelper = UserDatabaseHelper(this@MyInfo, "user.db", 1)
+                val dbHelper = UserDatabaseHelper(this@MyInfo, "user.db", 2)
                 val db = dbHelper.writableDatabase
                 db.execSQL(
                     "update User set sex = ? where username = ?",
@@ -69,7 +70,7 @@ class MyInfo : AppCompatActivity() {
 
     @SuppressLint("Range")
     fun findIdByUsername(username: String): Int {
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
         val db = dbHelper.writableDatabase
         val cursor = db.query(
             "User", null, "username=?",
@@ -88,7 +89,7 @@ class MyInfo : AppCompatActivity() {
 
     @SuppressLint("Range")
     fun findSexByUsername(username: String): String {
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
         val db = dbHelper.writableDatabase
 //        val cursor = db.query(
 //            "User", null, "username=?",
@@ -108,14 +109,14 @@ class MyInfo : AppCompatActivity() {
 //            } while (cursor.moveToNext())
 //        }
         cursor.moveToFirst()
-        val dbSex =  cursor.getString(cursor.getColumnIndex("sex")) ?: "null"
+        val dbSex = cursor.getString(cursor.getColumnIndex("sex")) ?: "null"
 
         return dbSex ?: "null"
     }
 
     @SuppressLint("Range")
     fun findBirthdayByUsername(username: String): String {
-        val dbHelper = UserDatabaseHelper(this, "user.db", 1)
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
         val db = dbHelper.writableDatabase
         val cursor = db.query(
             "User", null, "username=?",
