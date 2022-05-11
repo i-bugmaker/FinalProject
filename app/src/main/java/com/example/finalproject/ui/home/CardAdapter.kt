@@ -32,6 +32,7 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
         val publicTime: TextView = view.findViewById(R.id.public_time)
         val adopt_btn: Button = view.findViewById(R.id.adopt_btn)
         val adopt_text: TextView = view.findViewById(R.id.adopt)
+        val sex:ImageView = view.findViewById(R.id.sexPic)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardAdapter.ViewHolder {
@@ -66,7 +67,8 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
             )
         }
         holder.adopt_btn.isEnabled = !card.isAdopted
-        holder.adopt_text.text = if (card.isAdopted == true) "已领养" else "未领养"
+        holder.adopt_text.text = if (card.isAdopted == true) "已领养" else "待领养"
+        if (card.sex=="雌性") holder.sex.setImageResource(R.drawable.ic_female)
     }
 
     override fun getItemCount(): Int =
