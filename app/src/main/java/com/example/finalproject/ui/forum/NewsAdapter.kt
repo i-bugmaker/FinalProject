@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.finalproject.News
 import com.example.finalproject.R
 import java.io.InputStream
@@ -18,6 +19,8 @@ import java.net.URL
 
 class NewsAdapter(mContext: Context, val newsList: List<News>) :
     RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+    val myContext = mContext
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val newsImage: ImageView = view.findViewById(R.id.news_image)
         val newsTitle: TextView = view.findViewById(R.id.news_title)
@@ -32,13 +35,14 @@ class NewsAdapter(mContext: Context, val newsList: List<News>) :
 
     override fun onBindViewHolder(holder: NewsAdapter.ViewHolder, position: Int) {
         val news = newsList[position]
-        println("newsList.size = "+ newsList.size)
+        println("newsList.size = " + newsList.size)
 
         holder.newsTitle.text = news.title
         holder.newsDescription.text = news.description
         holder.newsCtime.text = news.ctime
-        holder.newsImage.setImageBitmap(getURLimage(news.picUrl))
-
+        println(news.picUrl)
+//        holder.newsImage.setImageBitmap(getURLimage(news.picUrl))
+        Glide.with(myContext).load(news.picUrl).into(holder.newsImage)
     }
 
     override fun getItemCount(): Int =
