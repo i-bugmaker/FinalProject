@@ -45,6 +45,7 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: CardAdapter.ViewHolder, position: Int) {
         val card = cardList[position]
+        println("cardList.size = "+ cardList.size)
 
 
         holder.petImage.setImageBitmap(card.image)

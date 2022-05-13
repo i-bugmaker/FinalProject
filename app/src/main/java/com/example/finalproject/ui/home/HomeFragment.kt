@@ -92,12 +92,11 @@ class HomeFragment : Fragment() {
                     0,
                     Card(pet_id, nickname, breed, age, sex, bit, description, publicTime, username,isAdopt)
                 )
-                val adapter = CardAdapter(requireContext(), cardList)
-                println(requireContext())
-                binding.recyclerView.adapter = adapter
+
             } while (pet_cursor.moveToNext())
         }
-
+        val adapter = CardAdapter(requireContext(), cardList)
+        binding.recyclerView.adapter = adapter
 //        }
 
 //        homeViewModel.cardList
