@@ -1,8 +1,7 @@
 package com.example.finalproject.ui.forum
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.finalproject.HomePage
 import com.example.finalproject.News
 import com.example.finalproject.R
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class NewsAdapter(mContext: Context, val newsList: List<News>) :
@@ -28,7 +26,7 @@ class NewsAdapter(mContext: Context, val newsList: List<News>) :
         val newsTitle: TextView = view.findViewById(R.id.news_title)
         val newsDescription: TextView = view.findViewById(R.id.news_description)
         val newsCtime: TextView = view.findViewById(R.id.news_ctime)
-        val newsLayout:LinearLayout=view.findViewById(R.id.news_layout)
+        val newsLayout: LinearLayout = view.findViewById(R.id.news_layout)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsAdapter.ViewHolder {
@@ -71,6 +69,10 @@ class NewsAdapter(mContext: Context, val newsList: List<News>) :
             Toast.makeText(
                 myContext, "you clicked newsLayout ${news.title}", Toast.LENGTH_SHORT
             ).show()
+            val intent = Intent(myContext, NewsDetailActivity::class.java)
+            intent.putExtra("url", news.url)
+//            startActivity(intent)
+            startActivity(myContext, intent, null)
         })
     }
 
