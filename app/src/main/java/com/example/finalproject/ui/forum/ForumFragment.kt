@@ -15,6 +15,7 @@ import com.example.finalproject.News
 import com.example.finalproject.NewsList
 import com.example.finalproject.NewsList.newsList
 import com.example.finalproject.databinding.FragmentForumBinding
+import com.example.finalproject.databinding.NewsItemBinding
 import com.example.finalproject.ui.home.CardAdapter
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -38,6 +39,7 @@ class ForumFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Toast.makeText(requireContext(), "我被打开了", Toast.LENGTH_SHORT).show()
         val forumViewModel =
             ViewModelProvider(this).get(ForumViewModel::class.java)
 
@@ -47,42 +49,49 @@ class ForumFragment : Fragment() {
 //        val newsList = NewsList.newsList
 //        val newsList = NewsList.newsList
 //        val newsList = NewsList.newsList
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.newsRecyclerview.layoutManager = layoutManager
-        thread {
-            try {
-                val client = OkHttpClient()
-                val request = Request.Builder()
-                    .url("http://api.tianapi.com/petnews/index?key=ec443486dcada5cc53a06be355d32ea3&num=3")
-                    .build()
-                println("请求API成功")
-                val response = client.newCall(request).execute()
-                val responseData = response.body?.string()
-                println("JsonData为" + responseData)
-                if (responseData != null) {
-                    val jsonArray = parseJSONWithGSON(responseData)
+
+
+        if (newsList.size == 0) {
+            thread {
+                try {
+                    val client = OkHttpClient()
+                    val request = Request.Builder()
+                        .url("http://api.tianapi.com/petnews/index?key=ec443486dcada5cc53a06be355d32ea3&num=3")
+                        .build()
+                    println("请求API成功")
+                    val response = client.newCall(request).execute()
+                    val responseData = response.body?.string()
+                    println("JsonData为" + responseData)
+                    if (responseData != null) {
+                        val jsonArray = parseJSONWithGSON(responseData)
 //                    println("返回的代码为:" + apiRet.code_api)
 //                    println("返回的信息为:" + apiRet.msg_api)
-                    for (i in 0 until jsonArray!!.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val id = jsonObject.getString("id")
-                        val ctime = jsonObject.getString("ctime")
-                        val title = jsonObject.getString("title")
-                        println(title)
-                        val description = jsonObject.getString("description")
-                        val source = jsonObject.getString("source")
-                        val picUrl = jsonObject.getString("picUrl")
-                        val url = jsonObject.getString("url")
-                        NewsList.newsList.add(
-                            0,
-                            News(id, ctime, title, description, source, picUrl, url)
-                        )
+                        for (i in 0 until jsonArray!!.length()) {
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val id = jsonObject.getString("id")
+                            val ctime = jsonObject.getString("ctime")
+                            val title = jsonObject.getString("title")
+                            println(title)
+                            val description = jsonObject.getString("description")
+                            val source = jsonObject.getString("source")
+                            val picUrl = jsonObject.getString("picUrl")
+                            val url = jsonObject.getString("url")
+                            newsList.add(
+                                0,
+                                News(id, ctime, title, description, source, picUrl, url)
+                            )
+                        }
+
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.newsRecyclerview.layoutManager = layoutManager
+        val adapter = NewsAdapter(requireContext(), newsList)
+        binding.newsRecyclerview.adapter = adapter
         println("新闻列表里面容量:")
         println(newsList.size)
 
@@ -91,8 +100,7 @@ class ForumFragment : Fragment() {
 //            textView.text = it
 //        }
 
-        val adapter = NewsAdapter(requireContext(), newsList)
-        binding.newsRecyclerview.adapter = adapter
+
         return root
     }
 

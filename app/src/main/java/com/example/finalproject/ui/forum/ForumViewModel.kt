@@ -10,4 +10,5 @@ class ForumViewModel : ViewModel() {
         value = "This is forum Fragment"
     }
     val text: LiveData<String> = _text
+
 }

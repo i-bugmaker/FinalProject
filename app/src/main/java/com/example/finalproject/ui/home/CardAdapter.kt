@@ -60,7 +60,6 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             val formatted = current.format(formatter)
 
-
             adopt_cursor.moveToFirst()
             adoptDb.execSQL(
                 "insert into Adopt (username,pet_id,date) values(?, ?, ?)",

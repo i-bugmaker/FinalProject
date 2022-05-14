@@ -1,6 +1,7 @@
 package com.example.finalproject
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -35,4 +36,6 @@ class HomePage : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    fun onClick(view: View) {}
 }

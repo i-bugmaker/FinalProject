@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
+        android:id="@+id/news_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="onClick"
         android:orientation="horizontal">
 
         <ImageView
@@ -13,6 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:layout_margin="10dp"
             android:src="@drawable/ic_male" />
 
         <LinearLayout
@@ -28,7 +36,7 @@
                 android:layout_weight="2"
                 android:text="标题"
                 android:textColor="#ff83"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/news_description"
