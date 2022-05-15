@@ -2,7 +2,7 @@ package com.example.finalproject.ui.me
 
 import android.R
 import android.annotation.SuppressLint
-import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.finalproject.ModifyName
 import com.example.finalproject.User
 import com.example.finalproject.databinding.ActivityMyInfoBinding
 import com.example.finalproject.db.UserDatabaseHelper
@@ -66,6 +67,12 @@ class MyInfo : AppCompatActivity() {
             }
 
         }
+
+        usernameInput.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, ModifyName::class.java)
+            intent.putExtra("currentUsername", currentUsername)
+            startActivity(intent)
+        })
     }
 
     @SuppressLint("Range")

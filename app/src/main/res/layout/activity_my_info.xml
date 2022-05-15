@@ -94,6 +94,7 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -112,11 +113,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center_vertical|start"
                 android:text="" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -130,24 +134,25 @@
                 android:gravity="center"
                 android:text="性别:" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/sex_input"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="4"-->
-<!--                android:gravity="center_vertical|start"-->
-<!--                android:clickable="true"-->
-<!--                android:text="" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/sex_input"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_weight="4"-->
+            <!--                android:gravity="center_vertical|start"-->
+            <!--                android:clickable="true"-->
+            <!--                android:text="" />-->
             <Spinner
                 android:id="@+id/sex_input"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:spinnerMode="dialog"
-                android:gravity="center_vertical|start" />
+                android:gravity="center_vertical|start"
+                android:spinnerMode="dialog" />
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
