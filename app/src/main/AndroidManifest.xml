@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".ModifyBirthday"
+            android:exported="false" />
+        <activity
             android:name=".ModifyName"
             android:exported="false" />
         <activity

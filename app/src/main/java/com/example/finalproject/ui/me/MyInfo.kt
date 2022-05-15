@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.finalproject.ModifyBirthday
 import com.example.finalproject.ModifyName
 import com.example.finalproject.User
 import com.example.finalproject.databinding.ActivityMyInfoBinding
@@ -70,6 +71,12 @@ class MyInfo : AppCompatActivity() {
 
         usernameInput.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, ModifyName::class.java)
+            intent.putExtra("currentUsername", currentUsername)
+            startActivity(intent)
+        })
+
+        birthdayInput.setOnClickListener(View.OnClickListener {
+            val intent = Intent(this, ModifyBirthday::class.java)
             intent.putExtra("currentUsername", currentUsername)
             startActivity(intent)
         })
