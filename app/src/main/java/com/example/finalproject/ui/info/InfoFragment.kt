@@ -22,6 +22,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.finalproject.User
 import com.example.finalproject.databinding.FragmentInfoBinding
 import com.example.finalproject.db.PetDatabaseHelper
 import com.example.finalproject.db.PublicDatabaseHelper
@@ -61,6 +62,7 @@ class InfoFragment : Fragment() {
 //        infoViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+        binding.contact.setText(User.getCurrentUsername())
         val capture = binding.capture
         capture.setOnClickListener {
             Toast.makeText(requireContext(), "开始拍照", Toast.LENGTH_SHORT).show()
@@ -111,7 +113,6 @@ class InfoFragment : Fragment() {
             val description = binding.description.text.toString()
 //            val capture = binding.capture
             val image = binding.image
-
             val contact = binding.contact.text.toString()
             val phone = binding.phone.text.toString()
 
@@ -168,6 +169,8 @@ class InfoFragment : Fragment() {
                     val bitmap = BitmapFactory.decodeStream(
                         requireContext().contentResolver.openInputStream(imageUri)
                     )
+
+
                     val rotatedBitmap = rotateIfRequired(bitmap)
                     binding.image.setImageBitmap(rotatedBitmap)
                 }

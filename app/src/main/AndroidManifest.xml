@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject">
         <activity
+            android:name=".ui.me.MyPublic"
+            android:exported="false" />
+        <activity
             android:name=".ModifyBirthday"
             android:exported="false" />
         <activity

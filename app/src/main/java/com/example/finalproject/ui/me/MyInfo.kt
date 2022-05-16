@@ -19,11 +19,14 @@ import com.example.finalproject.db.UserDatabaseHelper
 
 
 class MyInfo : AppCompatActivity() {
+    @SuppressLint("Range")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMyInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val dbHelper = UserDatabaseHelper(this, "user.db", 2)
+        val db = dbHelper.writableDatabase
 
         val useridInput = binding.useridInput
         val usernameInput = binding.usernameInput
@@ -42,7 +45,9 @@ class MyInfo : AppCompatActivity() {
         val currentSex = findSexByUsername(currentUsername)
         Toast.makeText(this, "当前数据库性别为$currentSex", Toast.LENGTH_SHORT).show()
         binding.sexInput.setSelection(adapter.getPosition(currentSex))
-        birthdayInput.text = findBirthdayByUsername(currentUsername)
+        val cursor = db.rawQuery("select * from User where username = ?", arrayOf(currentUsername))
+        cursor.moveToFirst()
+        birthdayInput.text = cursor.getString(cursor.getColumnIndex("birthday"))
 
         //将选择的性别写会数据库
         binding.sexInput.adapter = adapter

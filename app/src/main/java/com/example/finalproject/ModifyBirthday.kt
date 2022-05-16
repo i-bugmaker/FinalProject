@@ -21,12 +21,12 @@ class ModifyBirthday : AppCompatActivity() {
         val month = datePicker.month
         val day = datePicker.dayOfMonth
 
-        dateView.text = "${year}年${month}月${day}日"
+        dateView.text = "${year}年${month+1}月${day}日"
 
         datePicker.init(
             year, month, day
         ) { view, year, month, day ->
-            dateView.text = "${year}年${month}月${day}日"
+            dateView.text = "${year}年${month+1}月${day}日"
         }
 
         val dbHelper = UserDatabaseHelper(this, "user.db", 2)
@@ -35,6 +35,5 @@ class ModifyBirthday : AppCompatActivity() {
             "update User set birthday = ? where username = ?",
             arrayOf(dateView.text, currentUsername)
         )
-
     }
 }

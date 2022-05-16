@@ -56,7 +56,7 @@ class ForumFragment : Fragment() {
                 try {
                     val client = OkHttpClient()
                     val request = Request.Builder()
-                        .url("http://api.tianapi.com/petnews/index?key=ec443486dcada5cc53a06be355d32ea3&num=3")
+                        .url("http://api.tianapi.com/petnews/index?key=ec443486dcada5cc53a06be355d32ea3&num=10")
                         .build()
                     println("请求API成功")
                     val response = client.newCall(request).execute()
