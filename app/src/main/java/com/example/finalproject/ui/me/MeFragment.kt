@@ -48,7 +48,11 @@ class MeFragment : Fragment() {
 //                    savedInstanceState?.putString("currentUser",currentUser)
                     startActivity(intent)
                 }
-                1 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
+                1 -> {
+                    val intent = Intent(requireContext(), MyAdopt::class.java)
+//                    savedInstanceState?.putString("currentUser",currentUser)
+                    startActivity(intent)
+                }
                 2 -> Toast.makeText(requireContext(), meViewModel.data[position], Toast.LENGTH_SHORT).show()
                 3 -> {
                     val intent = Intent(requireContext(), MyPublic::class.java)

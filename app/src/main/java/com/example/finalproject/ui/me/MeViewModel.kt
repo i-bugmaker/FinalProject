@@ -10,7 +10,7 @@ class MeViewModel() : ViewModel() {
 //    }
 //    val text: LiveData<String> = _text
     val data = listOf(
-        "个人信息", "领养信息", "我的收藏", "我的发帖"
+        "个人信息", "领养信息",  "我的发帖"
     )
 
     val sexOption = listOf(

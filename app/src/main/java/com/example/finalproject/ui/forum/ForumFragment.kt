@@ -49,7 +49,10 @@ class ForumFragment : Fragment() {
 //        val newsList = NewsList.newsList
 //        val newsList = NewsList.newsList
 //        val newsList = NewsList.newsList
-
+        val layoutManager = LinearLayoutManager(requireContext())
+        binding.newsRecyclerview.layoutManager = layoutManager
+        val adapter = NewsAdapter(requireContext(), newsList)
+        binding.newsRecyclerview.adapter = adapter
 
         if (newsList.size == 0) {
             thread {
@@ -88,12 +91,6 @@ class ForumFragment : Fragment() {
                 }
             }
         }
-        val layoutManager = LinearLayoutManager(requireContext())
-        binding.newsRecyclerview.layoutManager = layoutManager
-        val adapter = NewsAdapter(requireContext(), newsList)
-        binding.newsRecyclerview.adapter = adapter
-        println("新闻列表里面容量:")
-        println(newsList.size)
 
 //        val textView: TextView = binding.textForum
 //        forumViewModel.text.observe(viewLifecycleOwner) {
