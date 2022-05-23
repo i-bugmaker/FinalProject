@@ -15,5 +15,6 @@ class Card(
     val description:String,
     val publicTime:String,
     val username:String,
-    var isAdopted:Boolean = false
+    var isAdopted:Boolean = false,
+    var isEnable:Boolean = true
 )

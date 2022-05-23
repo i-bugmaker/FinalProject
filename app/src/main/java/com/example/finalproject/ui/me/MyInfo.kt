@@ -35,7 +35,7 @@ class MyInfo : AppCompatActivity() {
         val currentUsername = User.getCurrentUsername()
 
 
-        //从数据获取相关值
+        //从数据库获取相关值
         usernameInput.text = currentUsername
         useridInput.text = findIdByUsername(currentUsername).toString()
 
@@ -68,10 +68,9 @@ class MyInfo : AppCompatActivity() {
                 )
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
         }
 
         usernameInput.setOnClickListener(View.OnClickListener {

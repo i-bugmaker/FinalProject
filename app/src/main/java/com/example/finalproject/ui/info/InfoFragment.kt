@@ -80,7 +80,7 @@ class InfoFragment : Fragment() {
             } else {
                 Uri.fromFile(outputImage)
             }
-// 启动相机程序
+            // 启动相机程序
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -97,25 +97,22 @@ class InfoFragment : Fragment() {
             Toast.makeText(requireContext(), "从相册选择", Toast.LENGTH_SHORT).show()
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
-// 指定只显示图片
+            // 指定只显示图片
             intent.type = "image/*"
             startActivityForResult(intent, fromAlbum)
         }
         //发布按钮事件
         binding.publish.setOnClickListener {
-            val homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
+            val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
             val nickname = binding.nickname.text.toString()
             val breed = binding.breed.text.toString()
             val age = binding.age.text.toString()
             val sex =
                 if (binding.rbFemale.isChecked) binding.rbFemale.text.toString() else binding.rbMale.text.toString()
             val description = binding.description.text.toString()
-//            val capture = binding.capture
             val image = binding.image
             val contact = binding.contact.text.toString()
             val phone = binding.phone.text.toString()
-
 
             val petDbHelper = PetDatabaseHelper(requireContext(), "pet.db", 2)
             val petDb = petDbHelper.writableDatabase
@@ -136,20 +133,10 @@ class InfoFragment : Fragment() {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             val formatted = current.format(formatter)
 
-
             publicDb.execSQL(
                 "insert into Public (date, description, pet_id, contact,phone) values(?, ?, ?, ?,?)",
                 arrayOf(formatted, description, pet_id, contact, phone)
             )
-//            val cursor = petDb.rawQuery("select * from Pet", null)
-//            cursor.moveToLast()
-//            val imageHex = cursor.getBlob(cursor.getColumnIndex("image"))
-//            val bit = BitmapFactory.decodeByteArray(imageHex, 0, imageHex.size)
-//            CardList.cardList.add(0, Card(nickname, breed, age, sex, bit))
-////            val image = binding.image.toString().toInt()
-//            val adapter = CardAdapter(CardList.cardList)
-//            adapter.notifyItemInserted(0)
-
             Toast.makeText(requireContext(), "发布成功", Toast.LENGTH_SHORT).show()
         }
         return root
@@ -165,12 +152,10 @@ class InfoFragment : Fragment() {
         when (requestCode) {
             takePhoto -> {
                 if (resultCode == Activity.RESULT_OK) {
-// 将拍摄的照片显示出来
+                    // 将拍摄的照片显示出来
                     val bitmap = BitmapFactory.decodeStream(
                         requireContext().contentResolver.openInputStream(imageUri)
                     )
-
-
                     val rotatedBitmap = rotateIfRequired(bitmap)
                     binding.image.setImageBitmap(rotatedBitmap)
                 }
@@ -179,40 +164,45 @@ class InfoFragment : Fragment() {
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     imageUri = data.data!!
 //                        val bitmap = getBitmapFromUri(imageUri)
-                    val bitmap = BitmapFactory.decodeFileDescriptor(requireContext().contentResolver.openFileDescriptor(imageUri, "r")?.fileDescriptor)
-                        binding.image.setImageBitmap(bitmap)
-                    }
+                    val bitmap = BitmapFactory.decodeFileDescriptor(
+                        requireContext().contentResolver.openFileDescriptor(
+                            imageUri,
+                            "r"
+                        )?.fileDescriptor
+                    )
+                    binding.image.setImageBitmap(bitmap)
                 }
             }
         }
     }
+}
 
 //    private fun getBitmapFromUri(uri: Uri) =contentResolver.openFileDescriptor(uri, "r")?.use {
 //            BitmapFactory.decodeFileDescriptor(it.fileDescriptor)
 //        }
 
-    private fun rotateIfRequired(bitmap: Bitmap): Bitmap {
-        val exif = ExifInterface(outputImage.path)
-        val orientation = exif.getAttributeInt(
-            ExifInterface.TAG_ORIENTATION,
-            ExifInterface.ORIENTATION_NORMAL
-        )
-        return when (orientation) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(bitmap, 90)
-            ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(bitmap, 180)
-            ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(bitmap, 270)
-            else -> bitmap
-        }
+private fun rotateIfRequired(bitmap: Bitmap): Bitmap {
+    val exif = ExifInterface(outputImage.path)
+    val orientation = exif.getAttributeInt(
+        ExifInterface.TAG_ORIENTATION,
+        ExifInterface.ORIENTATION_NORMAL
+    )
+    return when (orientation) {
+        ExifInterface.ORIENTATION_ROTATE_90 -> rotateBitmap(bitmap, 90)
+        ExifInterface.ORIENTATION_ROTATE_180 -> rotateBitmap(bitmap, 180)
+        ExifInterface.ORIENTATION_ROTATE_270 -> rotateBitmap(bitmap, 270)
+        else -> bitmap
     }
+}
 
-    private fun rotateBitmap(bitmap: Bitmap, degree: Int): Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(degree.toFloat())
-        val rotatedBitmap = Bitmap.createBitmap(
-            bitmap, 0, 0, bitmap.width, bitmap.height,
-            matrix, true
-        )
-        bitmap.recycle() // 将不再需要的Bitmap对象回收
-        return rotatedBitmap
-    }
+private fun rotateBitmap(bitmap: Bitmap, degree: Int): Bitmap {
+    val matrix = Matrix()
+    matrix.postRotate(degree.toFloat())
+    val rotatedBitmap = Bitmap.createBitmap(
+        bitmap, 0, 0, bitmap.width, bitmap.height,
+        matrix, true
+    )
+    bitmap.recycle() // 将不再需要的Bitmap对象回收
+    return rotatedBitmap
+}
 

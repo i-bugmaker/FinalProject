@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.Card
 import com.example.finalproject.CardList
+import com.example.finalproject.User
 import com.example.finalproject.databinding.FragmentHomeBinding
 import com.example.finalproject.databinding.FragmentInfoBinding
 import com.example.finalproject.db.AdoptDatabaseHelper
@@ -38,23 +39,11 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val binding2 = FragmentInfoBinding.inflate(inflater, container, false)
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         val cardList = CardList.cardList
-//        if (cardList.isEmpty()) {
         Toast.makeText(requireContext(), "初始化数据", Toast.LENGTH_SHORT).show()
 
         val layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.layoutManager = layoutManager
-//            cardList.apply {
-//                add(Card("狗", R.drawable.banner0))
-//                add(Card("猫", R.drawable.banner1))
-//                add(Card("鹦鹉", R.drawable.banner2))
-//                add(Card("金鱼", R.drawable.banner3))
-//
-//            }
         val petDbHelper = PetDatabaseHelper(requireContext(), "pet.db", 2)
         val petDb = petDbHelper.writableDatabase
         val pet_cursor = petDb.rawQuery("select * from Pet", null)
@@ -65,11 +54,10 @@ class HomeFragment : Fragment() {
         val adoptDbHelper = AdoptDatabaseHelper(requireContext(), "adopt.db", 2)
         val adoptDb = adoptDbHelper.writableDatabase
 
-
         CardList.cardList.clear()
         if (pet_cursor.moveToFirst()) {
             do {
-// 遍历Cursor对象，取出数据并打印
+                // 遍历Cursor对象，取出数据并打印
                 val imageHex = pet_cursor.getBlob(pet_cursor.getColumnIndex("image"))
                 val bit = BitmapFactory.decodeByteArray(imageHex, 0, imageHex.size)
                 val nickname = pet_cursor.getString(pet_cursor.getColumnIndex("nickname"))
@@ -83,23 +71,24 @@ class HomeFragment : Fragment() {
                 val description =
                     public_cursor.getString(public_cursor.getColumnIndex("description"))
                 val publicTime = public_cursor.getString(public_cursor.getColumnIndex("date"))
-                val username = public_cursor.getString(public_cursor.getColumnIndex("contact"))
+                val contact = public_cursor.getString(public_cursor.getColumnIndex("contact"))
 
                 val adopt_cursor =
-                    adoptDb.rawQuery("select * from Adopt where id = ?", arrayOf(pet_id))
+                    adoptDb.rawQuery("select * from Adopt where pet_id = ?", arrayOf(pet_id))
                 var isAdopt = adopt_cursor.moveToFirst()
+                var isEnable = true
+                if (User.getCurrentUsername() == contact) {
+                    isEnable = false
+                }
                 CardList.cardList.add(
                     0,
-                    Card(pet_id, nickname, breed, age, sex, bit, description, publicTime, username,isAdopt)
+                    Card(pet_id, nickname, breed, age, sex, bit, description, publicTime, contact, isAdopt, isEnable)
                 )
 
             } while (pet_cursor.moveToNext())
         }
         val adapter = CardAdapter(requireContext(), cardList)
         binding.recyclerView.adapter = adapter
-//        }
-
-//        homeViewModel.cardList
         return root
     }
 
@@ -107,5 +96,4 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

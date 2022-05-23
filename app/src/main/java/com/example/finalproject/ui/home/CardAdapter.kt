@@ -46,8 +46,6 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
     override fun onBindViewHolder(holder: CardAdapter.ViewHolder, position: Int) {
         val card = cardList[position]
         println("cardList.size = "+ cardList.size)
-
-
         holder.petImage.setImageBitmap(card.image)
         holder.petBreed.text = card.breed
         holder.description.text = card.description
@@ -66,7 +64,7 @@ class CardAdapter(mContext: Context, val cardList: List<Card>) :
                 arrayOf(card.username, card.pet_id, formatted)
             )
         }
-        holder.adopt_btn.isEnabled = !card.isAdopted
+        holder.adopt_btn.isEnabled = card.isEnable
         holder.adopt_text.text = if (card.isAdopted == true) "已领养" else "待领养"
         if (card.sex=="雌性") holder.sex.setImageResource(R.drawable.ic_female)
     }

@@ -46,9 +46,6 @@ class ForumFragment : Fragment() {
         _binding = FragmentForumBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val newsList = NewsList.newsList
-//        val newsList = NewsList.newsList
-//        val newsList = NewsList.newsList
         val layoutManager = LinearLayoutManager(requireContext())
         binding.newsRecyclerview.layoutManager = layoutManager
         val adapter = NewsAdapter(requireContext(), newsList)
@@ -64,11 +61,8 @@ class ForumFragment : Fragment() {
                     println("请求API成功")
                     val response = client.newCall(request).execute()
                     val responseData = response.body?.string()
-                    println("JsonData为" + responseData)
                     if (responseData != null) {
                         val jsonArray = parseJSONWithGSON(responseData)
-//                    println("返回的代码为:" + apiRet.code_api)
-//                    println("返回的信息为:" + apiRet.msg_api)
                         for (i in 0 until jsonArray!!.length()) {
                             val jsonObject = jsonArray.getJSONObject(i)
                             val id = jsonObject.getString("id")
@@ -108,9 +102,6 @@ class ForumFragment : Fragment() {
             val code = json.getString("code")
             val msg = json.getString("msg")
             val newslist = json.getJSONArray("newslist")
-            println("返回的代码为:" + code)
-            println("返回的信息为:" + msg)
-            println("返回的list为:" + newslist)
             return newslist
         } catch (e: Exception) {
             e.printStackTrace()

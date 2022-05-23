@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
-    <ImageView        android:id="@+id/imageView"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="112dp"
@@ -22,10 +23,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
+        android:background="@drawable/shape_frame"
         android:ems="10"
         android:hint="请输入密码"
         android:inputType="textPassword"
-        android:background="@drawable/shape_frame"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
