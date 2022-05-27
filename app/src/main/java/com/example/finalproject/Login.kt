@@ -37,7 +37,6 @@ class Login : AppCompatActivity() {
         loginBtn.setOnClickListener {
             val username = usernameView.text.toString()
             val password = passwordView.text.toString()
-            Toast.makeText(this, username, Toast.LENGTH_SHORT).show()
             if (username.isEmpty() || password.isEmpty()
             ) {
                 Toast.makeText(this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show()

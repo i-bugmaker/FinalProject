@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.finalproject.MyPublicCard
+import com.example.finalproject.MyAdoptCard
 import com.example.finalproject.R
 
-class MyAdoptAdapter(val myAdoptList: List<MyPublicCard>) :
+class MyAdoptAdapter(val myAdoptList: List<MyAdoptCard>) :
     RecyclerView.Adapter<MyAdoptAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,16 +28,16 @@ class MyAdoptAdapter(val myAdoptList: List<MyPublicCard>) :
     }
 
     override fun onBindViewHolder(holder: MyAdoptAdapter.ViewHolder, position: Int) {
-        val public_card = myAdoptList[position]
-        holder.public_time_ma.text = public_card.date
-        holder.cardBreed_ma.text = public_card.breed
-        holder.description_ma.text = public_card.description
-        if (public_card.sex == "雌性") {
+        val adopt_card = myAdoptList[position]
+        holder.public_time_ma.text = adopt_card.date
+        holder.cardBreed_ma.text = adopt_card.breed
+        holder.description_ma.text = adopt_card.description
+        if (adopt_card.sex == "雌性") {
             holder.sexPic_ma.setImageResource(R.drawable.ic_female)
         } else {
             holder.sexPic_ma.setImageResource(R.drawable.ic_male)
         }
-        holder.cardImage_ma.setImageBitmap(public_card.image)
+        holder.cardImage_ma.setImageBitmap(adopt_card.image)
     }
 
     override fun getItemCount(): Int = myAdoptList.size

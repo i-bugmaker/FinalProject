@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.finalproject.MyAdoptCard
 import com.example.finalproject.MyPublicCard
 import com.example.finalproject.R
 import com.example.finalproject.User
@@ -18,7 +19,7 @@ import java.io.InputStream
 import java.lang.ref.SoftReference
 
 class MyAdopt : AppCompatActivity() {
-    private val myAdoptList = ArrayList<MyPublicCard>()
+    private val myAdoptList = ArrayList<MyAdoptCard>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +72,7 @@ class MyAdopt : AppCompatActivity() {
             val description = public_cursor2.getString(public_cursor2.getColumnIndex("description"))
 
             myAdoptList.add(
-                MyPublicCard(nickname, breed, age, sex, image_bitmap!!, date, description)
+                MyAdoptCard(nickname, breed, age, sex, image_bitmap!!, date, description)
             )
         }
     }

@@ -39,9 +39,7 @@ class NewsDetailActivity : AppCompatActivity() {
                 handler: SslErrorHandler,
                 error: SslError
             ) {
-                //handler.cancel(); // Android默认的处理方式
                 handler.proceed() // 接受所有网站的证书
-                //handleMessage(Message msg); // 进行其他处理
             }
         }
         if (url != null) {

@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
                     adoptDb.rawQuery("select * from Adopt where pet_id = ?", arrayOf(pet_id))
                 var isAdopt = adopt_cursor.moveToFirst()
                 var isEnable = true
-                if (User.getCurrentUsername() == contact) {
+                if (User.getCurrentUsername() == contact || isAdopt) {
                     isEnable = false
                 }
                 CardList.cardList.add(
